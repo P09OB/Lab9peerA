@@ -1,5 +1,7 @@
 package main;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -43,11 +45,24 @@ public class Main extends PApplet implements onMessageListener {
 	}
 	
 	public void setup() {
+		
+		try {
+			InetAddress direccion = InetAddress.getLocalHost();
+			
+			String ip = direccion.getHostAddress();
+			
+			System.out.println(ip);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		udp = new UDPconection();
 		udp.setObserver(this);
 		udp.start();
 		orden = new ArrayList<Orden>();
+		
+		
 
 		
 	}
@@ -65,10 +80,13 @@ public class Main extends PApplet implements onMessageListener {
 			
 			
 			if(orden1.getPosy() <= 500) {
+				
 			int aumentar = i*100;
 			orden1.setPosy(aumentar);
+			
 			}	
 			if(orden1.getPosy() == 500) {
+				
 				orden1.setPosx(300);
 				orden1.setPosy(0);
 				
@@ -85,7 +103,8 @@ public class Main extends PApplet implements onMessageListener {
 			}
 			orden1.pintar();
 			orden1.setNumero(i+1);
-			System.out.println(orden1.getPosy());
+			//System.out.println(orden1.getPosy());
+			System.out.println(orden1.getPosy() + orden1.getPosx() );
 			
 		}
 		
@@ -105,11 +124,23 @@ public class Main extends PApplet implements onMessageListener {
 	public void mousePressed() {
 		
 		for(int i =0; i<orden.size(); i++) {
+		
 			
-			orden.remove(i);
+			Orden orden1 = orden.get(i);
+			
+			
+			if((mouseX  >= orden1.getPosx() && mouseX <= orden1.getPosx()+85) && (mouseY >= orden1.getPosy()  &&  mouseY  <= orden1.getPosy()+85) ) {
+				System.out.println("enviado");
+				orden.remove(i);
+
+				
+			}
+
+			
+			
 		}
 		udp.sendMessage("peer A");
-		System.out.println("enviado");
+		
 		
 		
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -41,11 +42,13 @@ public class UDPconection extends Thread {
 				DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
 				System.out.println("Esperando datagrama....");
 				socket.receive(packet);
+				SocketAddress ip = packet.getSocketAddress();
+				System.out.println(ip);
+
 				String mensaje = new String(packet.getData()).trim();
 				
 				Gson gson = new Gson();
 				Generic generic = gson.fromJson(mensaje,Generic.class);
-				
 				
 				
 				System.out.println("Tipo recibido..."+generic.type);

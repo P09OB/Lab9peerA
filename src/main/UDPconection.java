@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -42,8 +41,8 @@ public class UDPconection extends Thread {
 				DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
 				System.out.println("Esperando datagrama....");
 				socket.receive(packet);
-				SocketAddress ip = packet.getSocketAddress();
-				System.out.println(ip);
+				//SocketAddress ip = packet.getSocketAddress();
+				//System.out.println(ip);
 
 				String mensaje = new String(packet.getData()).trim();
 				
@@ -117,9 +116,11 @@ public class UDPconection extends Thread {
 					
 					try {
 						InetAddress ip;
-						ip = InetAddress.getByName("192.168.0.21");
+						ip = InetAddress.getByName("192.168.0.18");
 						DatagramPacket packet = new DatagramPacket(message.getBytes(),message.getBytes().length, ip,6000);
 						socket.send(packet);
+						System.out.println("enviado");
+						
 
 						
 					} catch (UnknownHostException e) {

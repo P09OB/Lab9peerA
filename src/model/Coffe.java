@@ -1,20 +1,30 @@
 package model;
 
 public class Coffe {
-	
-	private String type = "Coffe";
+
+    private String type = "Coffe";
     String id;
     String producto;
     String hora;
+    String ip;
 
     public Coffe() {
     }
 
-    public Coffe(String producto, String hora, String id) {
+    public Coffe(String producto, String hora, String id, String ip) {
         this.producto = producto;
         this.id = id;
         this.hora = hora;
+        this.ip = ip;
 
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getType() {
@@ -48,5 +58,4 @@ public class Coffe {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
 }

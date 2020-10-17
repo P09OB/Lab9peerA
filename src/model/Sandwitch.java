@@ -1,20 +1,30 @@
 package model;
 
 public class Sandwitch {
-	
-	private String type = "Sandwitch";
+
+    private String type = "Sandwitch";
     String id;
     String producto;
     String hora;
+    String ip;
 
     public Sandwitch() {
     }
 
-    public Sandwitch(String producto, String hora, String id) {
+    public Sandwitch(String producto, String hora, String id, String ip) {
         this.producto = producto;
         this.id = id;
         this.hora = hora;
+        this.ip = ip;
 
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getType() {
@@ -48,5 +58,4 @@ public class Sandwitch {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
 }

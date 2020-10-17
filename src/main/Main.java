@@ -21,7 +21,7 @@ public class Main extends PApplet implements onMessageListener {
 	private String product1= " ", product2=" ",product3=" ", product4=" ";
 	private boolean imagen1=false, imagen2 = false, imagen3 = false, imagen4 = false;
 	private String time;
-	private int numero = 1;
+	private int numero;
 	boolean cancelar;
 	
 
@@ -46,16 +46,6 @@ public class Main extends PApplet implements onMessageListener {
 	
 	public void setup() {
 		
-		try {
-			InetAddress direccion = InetAddress.getLocalHost();
-			
-			String ip = direccion.getHostAddress();
-			
-			System.out.println(ip);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		udp = new UDPconection();
 		udp.setObserver(this);
@@ -102,9 +92,9 @@ public class Main extends PApplet implements onMessageListener {
 				cancelar = true;
 			}
 			orden1.pintar();
-			orden1.setNumero(i+1);
-			//System.out.println(orden1.getPosy());
-			System.out.println(orden1.getPosy() + orden1.getPosx() );
+			
+			System.out.println(orden1.getNumero());
+
 			
 		}
 		
@@ -123,6 +113,8 @@ public class Main extends PApplet implements onMessageListener {
 	
 	public void mousePressed() {
 		
+		
+		
 		for(int i =0; i<orden.size(); i++) {
 		
 			
@@ -132,6 +124,7 @@ public class Main extends PApplet implements onMessageListener {
 			if((mouseX  >= orden1.getPosx() && mouseX <= orden1.getPosx()+85) && (mouseY >= orden1.getPosy()  &&  mouseY  <= orden1.getPosy()+85) ) {
 				System.out.println("enviado");
 				orden.remove(i);
+				udp.sendMessage("Pedido listo");
 
 				
 			}
@@ -139,7 +132,8 @@ public class Main extends PApplet implements onMessageListener {
 			
 			
 		}
-		udp.sendMessage("peer A");
+		
+		
 		
 		
 		
@@ -153,6 +147,7 @@ public class Main extends PApplet implements onMessageListener {
 		this.time = or.getHora();
 		
 		if(cancelar == false) {
+			numero = numero+1;
 		orden.add(new Orden(numero,or.getProducto(),or.getHora(),this));
 		}
 	}
@@ -163,6 +158,7 @@ public class Main extends PApplet implements onMessageListener {
 		this.product2 = san.getProducto();
 		this.time = san.getHora();
 		if(cancelar == false) {
+			numero = numero+1;
 		orden.add(new Orden(numero,san.getProducto(),san.getHora(),this));
 		}
 
@@ -174,6 +170,7 @@ public class Main extends PApplet implements onMessageListener {
 		this.product3 = coffe.getProducto();
 		this.time = coffe.getHora();
 		if(cancelar == false) {
+			numero = numero+1;
 		orden.add(new Orden(numero,coffe.getProducto(),coffe.getHora(),this));
 		}
 
@@ -186,6 +183,7 @@ public class Main extends PApplet implements onMessageListener {
 		this.product4 = smoothie.getProducto();
 		this.time = smoothie.getHora();
 		if(cancelar == false) {
+			numero = numero+1;
 		orden.add(new Orden(numero,smoothie.getProducto(),smoothie.getHora(),this));
 		}
 

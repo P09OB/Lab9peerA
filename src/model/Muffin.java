@@ -1,20 +1,30 @@
 package model;
 
 public class Muffin {
-	
-	private String type = "Muffin";
+
+    private String type = "Muffin";
     String id;
     String producto;
     String hora;
+    String ip;
 
     public Muffin() {
     }
 
-    public Muffin(String producto, String hora, String id) {
+    public Muffin(String producto, String hora, String id, String ip) {
         this.producto = producto;
         this.id = id;
         this.hora = hora;
+        this.ip = ip;
 
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getType() {

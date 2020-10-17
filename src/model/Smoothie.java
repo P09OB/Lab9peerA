@@ -1,20 +1,30 @@
 package model;
 
 public class Smoothie {
-	
-	private String type = "Sandwitch";
+
+    private String type = "Smoothie";
     String id;
     String producto;
     String hora;
+    String ip;
 
     public Smoothie() {
     }
 
-    public Smoothie(String producto, String hora, String id) {
+    public Smoothie(String producto, String hora, String id, String ip) {
         this.producto = producto;
         this.id = id;
         this.hora = hora;
+        this.ip = ip;
 
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getType() {
@@ -48,5 +58,5 @@ public class Smoothie {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
 }
+
